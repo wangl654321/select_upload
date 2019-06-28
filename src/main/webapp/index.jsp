@@ -149,7 +149,7 @@
     <script>
         $('#file-0a').fileinput({
             language: 'zh',
-            uploadUrl: '${ctx}/uploadFile',
+            uploadUrl: '${ctx}/uploadMultipleFile',
             allowedPreviewTypes: ['image', 'html', 'text', 'video', 'audio', 'flash']
         });
         $('#file-0a').on('fileuploaderror', function (event, data, previewId, index) {

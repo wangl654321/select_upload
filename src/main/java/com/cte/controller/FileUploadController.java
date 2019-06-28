@@ -39,18 +39,18 @@ public class FileUploadController {
 
     private static Logger logger = LogManager.getLogger();
 
+    private static String path = "E:/upload/fileUpload/";
+
     /**
      * @方法说明：单个或多个文件上传方法二
      * @时间： 2017-11-30 13:37
      * @创建人：wangl
      */
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     @ResponseBody
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     public Message uploadFileHandler(@RequestParam("file") MultipartFile file) throws IOException {
 
         //文件上传位置
-        String path = "E:/upload/fileUpload/";
-
         logger.info("单个或多个文件上传方法二");
         if (!file.isEmpty()) {
             InputStream is = null;
@@ -106,8 +106,8 @@ public class FileUploadController {
      * @时间： 2017-11-30 13:37
      * @创建人：wangl
      */
-    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     @ResponseBody
+    @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     public Message uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) throws IOException {
 
         logger.info("单个或多个文件上传方法一");
@@ -119,10 +119,10 @@ public class FileUploadController {
                 InputStream in = null;
                 OutputStream out = null;
                 try {
-                    String path = "/upload/fileUpload/" + file.getOriginalFilename();
                     CreateDir.createDir(path);
+                    String paths = path + file.getOriginalFilename();
 
-                    File serverFile = new File(path);
+                    File serverFile = new File(paths);
                     in = file.getInputStream();
                     out = new FileOutputStream(serverFile);
 
@@ -136,6 +136,7 @@ public class FileUploadController {
 
                 } catch (Exception e) {
                     arr.add(i);
+                    logger.error("单个或多个文件上传方法一异常,{}", e);
                 } finally {
                     out.close();
                     in.close();
