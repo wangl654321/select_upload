@@ -1,15 +1,9 @@
 package com.cte.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-
+import com.cte.entity.Message;
+import com.cte.entity.Status;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -19,26 +13,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cte.entity.Message;
-import com.cte.entity.Status;
+import java.io.*;
+import java.util.ArrayList;
 
 /***
  *
-*
-* 描    述：文件上传
-*
-* 创 建 者： @author wl
-* 创建时间： 2019/6/19 18:02
-* 创建描述：
-*
-* 修 改 者：
-* 修改时间：
-* 修改描述：
-*
-* 审 核 者：
-* 审核时间：
-* 审核描述：
-*
+ *
+ * 描    述：文件上传
+ *
+ * 创 建 者： @author wl
+ * 创建时间： 2019/6/19 18:02
+ * 创建描述：
+ *
+ * 修 改 者：
+ * 修改时间：
+ * 修改描述：
+ *
+ * 审 核 者：
+ * 审核时间：
+ * 审核描述：
+ *
  */
 @Controller
 public class FileUploadController {
@@ -115,11 +109,10 @@ public class FileUploadController {
     @RequestMapping(value = "/uploadMultipleFile", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     @ResponseBody
     public Message uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) throws IOException {
+
         Message msg = new Message();
         ArrayList<Integer> arr = new ArrayList<>();
-
         for (int i = 0; i < files.length; i++) {
-
             MultipartFile file = files[i];
             if (!file.isEmpty()) {
                 InputStream in = null;
