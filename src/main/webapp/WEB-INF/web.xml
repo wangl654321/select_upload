@@ -26,7 +26,16 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+	<!--原始多文件上传-->
+	<servlet>
+		<servlet-name>FileUpLoad</servlet-name>
+		<servlet-class>com.cte.controller.FileUpLoad</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileUpLoad</servlet-name>
+		<url-pattern>/fileLoad</url-pattern>
+	</servlet-mapping>
+
 	<!-- 添加对springmvc的支持 -->
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
