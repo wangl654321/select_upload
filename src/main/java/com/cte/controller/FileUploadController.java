@@ -4,8 +4,8 @@ import com.cte.entity.Message;
 import com.cte.entity.Status;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 @Controller
 public class FileUploadController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+    private static Logger logger = LogManager.getLogger();
 
     /**
      * @方法说明：单个或多个文件上传方法二
@@ -51,7 +51,7 @@ public class FileUploadController {
         //文件上传位置
         String path = "E:/upload/fileUpload/";
 
-        logger.info("上传单个或多个文件");
+        logger.info("单个或多个文件上传方法二");
         if (!file.isEmpty()) {
             InputStream is = null;
             FileOutputStream fos = null;
@@ -102,7 +102,7 @@ public class FileUploadController {
     }
 
     /**
-     * @方法说明：单个或多个文件上传
+     * @方法说明：单个或多个文件上传方法一
      * @时间： 2017-11-30 13:37
      * @创建人：wangl
      */
@@ -110,6 +110,7 @@ public class FileUploadController {
     @ResponseBody
     public Message uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files) throws IOException {
 
+        logger.info("单个或多个文件上传方法一");
         Message msg = new Message();
         ArrayList<Integer> arr = new ArrayList<>();
         for (int i = 0; i < files.length; i++) {
